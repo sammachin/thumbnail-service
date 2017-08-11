@@ -46,10 +46,9 @@ def index():
         Bucket=S3_BUCKET,
         Key=filename,
         Body=thumbnail,
-        ACL='public-read',
         ContentType='image/{}'.format(format),
     )
-
+    S3.put_object_acl(ACL='public-read', Bucket=S3_BUCKET, Key=filename)
     return {
         'url': 'https://s3.amazonaws.com/{}/{}'.format(S3_BUCKET, filename)
     }
